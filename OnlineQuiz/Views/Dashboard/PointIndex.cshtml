@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Point>
+@{
+    ViewData["Title"] = "Danh sách điểm";
+}
+
+<div class="main-content">
+    <div class="card">
+        <div class="card-body">
+            <table id="d_table" class="table">
+                <thead>
+                    <tr>
+                        <th>Tên môn học</th>
+                        <th>Kỳ thi</th>
+                        <th>Điểm</th>
+                        <th>Thời gian nộp bài</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Course.CourseName</td>
+                            <td>@item.Test.TestId</td>
+                            <td>@item.TotalPoint</td>
+                            <td>@item.AnswerTime</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Tên môn học</th>
+                        <th>Kỳ thi</th>
+                        <th>Điểm</th>
+                        <th>Thời gian nộp bài</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

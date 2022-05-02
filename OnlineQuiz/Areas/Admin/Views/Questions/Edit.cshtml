@@ -1,0 +1,55 @@
+﻿@model OnlineQuiz.Models.Question
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Chỉnh sửa thông tin câu hỏi</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/admin/trang-chu" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a href="/admin/cau-hoi" class="breadcrumb-item">Danh sách câu hỏi</a>
+            <span class="breadcrumb-item active">Chỉnh sửa thông tin</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Chỉnh sửa thông tin câu hỏi</h4>
+    </div>
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="Questions" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="QuestionId" />
+            <div class="form-group row">
+                <label asp-for="QuestionTitle" class="col-sm-2 col-form-label">Câu hỏi</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" asp-for="QuestionTitle" cols="10" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="TestId" class="col-sm-2 col-form-label">Bài thi</label>
+                <div class="col-sm-10">
+                    <select class="form-control select2" asp-for="TestId" asp-items="@ViewBag.Test">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="/admin/cau-hoi" class="btn btn-info">Trở về danh sách</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('.select2').select2();
+    </script>
+}

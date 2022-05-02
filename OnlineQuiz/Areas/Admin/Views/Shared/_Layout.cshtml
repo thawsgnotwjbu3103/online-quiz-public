@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Trang quản lý hệ thống</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="~/assets/admin/images/logo/favicon.png">
+    <!-- page css -->
+    <link href="~/assets/admin/vendors/select2/select2.css" rel="stylesheet" />
+    <!-- Core css -->
+    <link href="~/lib/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/assets/admin/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/admin/css/app.min.css" rel="stylesheet">
+    <link href="~/lib/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/lib/sweetalert2/dist/sweetalert2.min.js"></script>
+    <link href="~/css/admin.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="app">
+        <div class="layout">
+            <!-- Header START -->
+            <div class="header">
+                @await Html.PartialAsync("_HeaderPartial.cshtml")
+            </div>
+            <!-- Header END -->
+            <!-- Side Nav START -->
+            @await Html.PartialAsync("_SidebarPartial.cshtml")
+            <!-- Side Nav END -->
+            <!-- Page Container START -->
+            <div class="page-container">
+
+                <!-- Content Wrapper START -->
+                <div class="main-content">
+                    @RenderBody()
+                </div>
+                <!-- Content Wrapper END -->
+                <!-- Footer START -->
+                <footer class="footer">
+                    <div class="footer-content">
+                        <p class="m-b-0">Copyright © 2022 CNTT-44. All rights reserved.</p>
+                        <span>
+                            <a href="" class="text-gray m-r-15">Term &amp; Conditions</a>
+                            <a href="" class="text-gray">Privacy &amp; Policy</a>
+                        </span>
+                    </div>
+                </footer>
+                <!-- Footer END -->
+
+            </div>
+            <!-- Page Container END -->
+            <!-- Search Start-->
+            <div class="modal modal-left fade search" id="search-drawer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-between align-items-center">
+                            <h5 class="modal-title">Search</h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <i class="anticon anticon-close"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body scrollable">
+                            <form asp-area="Admin" asp-controller="Search" asp-action="Find">
+                                <div class="input-affix">
+                                    <i class="prefix-icon anticon anticon-search"></i>
+                                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search">
+                                    <input type="submit" hidden />
+                                </div>
+                            </form>
+                            <!-- Content goes Here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Search End-->
+            <!-- Quick View START -->
+            <div class="modal modal-right fade quick-view" id="quick-view">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-between align-items-center">
+                            <h5 class="modal-title">Quick tools</h5>
+                        </div>
+                        <div class="modal-body scrollable">
+                            <h5>Sinh viên</h5>
+                            <div>
+                                <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#importstudent">
+                                    <i class="anticon anticon-file-add"></i> Import sinh viên
+                                </button>
+                                <div class="my-2"></div>
+                                <a href="/admin/hoc-sinh/xuat-file" class="btn btn-primary w-100">
+                                    <i class="anticon anticon-download"></i> Export tất cả sinh viên
+                                </a>
+                            </div>
+                            <hr />
+                            <h5>Câu hỏi và trả lời</h5>
+                            <div>
+                                <button type="button" class="btn btn-success w-100" data-toggle="modal" data-target="#importquestion">
+                                    <i class="anticon anticon-file-add"></i> Import câu hỏi & trả lời
+                                </button>
+                            </div>
+                            <hr />
+                            <h5>Điểm thi</h5>
+                            <div>
+                                <a href="/admin/diem/xuat-file" class="btn btn-primary w-100">
+                                    <i class="anticon anticon-download"></i> Export điểm thi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Quick View END -->
+            <!--Partial view BEGIN-->
+            @await Html.PartialAsync("_ImportPartial.cshtml")
+            <!--Partial view END-->
+        </div>
+    </div>
+    <!-- Core Vendors JS -->
+    <script src="~/assets/admin/js/vendors.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- page js -->
+    <script src="~/assets/admin/vendors/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/assets/admin/vendors/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/admin/js/pages/datatables.js"></script>
+    <script src="~/assets/admin/vendors/select2/select2.min.js"></script>
+    <!-- Core JS -->
+    <script src="~/assets/admin/js/app.min.js"></script>
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false);
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<OnlineQuiz.Models.Point>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2 class="header-title">Danh sách điểm thi</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/admin/trang-chu" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách điểm thi</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h4 class="card-title">Danh sách điểm thi</h4>
+            <select id="selectFilter" class="w-15" asp-items="@ViewBag.Course">
+                <option value="">Lọc</option>
+                <option value="@Guid.Empty">Chọn tất cả</option>
+            </select>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="d_table" class="table">
+            <thead>
+                <tr>
+                    <td>Tên sinh viên</td>
+                    <td>Bài thi</td>
+                    <td>Môn học</td>
+                    <td>Tổng điểm</td>
+                    <td>Thời gian nộp bài</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Student.FullName</td>
+                        <td>@item.Test.TestName</td>
+                        <td>@item.Course.CourseName</td>
+                        <td>@item.TotalPoint</td>
+                        <td>@item.AnswerTime</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Tên sinh viên</td>
+                    <td>Bài thi</td>
+                    <td>Môn học</td>
+                    <td>Tổng điểm</td>
+                    <td>Thời gian nộp bài</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#selectFilter").select2();
+
+            $("#d_table").dataTable();
+
+            jQuery("#selectFilter").change(function () {
+                var courseId = jQuery(this).children(":selected").attr("value");
+
+                $.ajax({
+                    url: '/admin/diem/loc',
+                    dataType: 'json',
+                    method: 'GET',
+                    data: {
+                        courseId: courseId
+                    },
+                    contentType: 'application/json',
+                    async: true,
+                    success: function (result) {
+                        if (result.status == 'success') {
+                            window.location.href = result.redirectUrl
+                        }
+                    },
+                    error: function () {
+                        alert("error")
+                    }
+                });
+            });
+        });
+    </script>
+
+}

@@ -1,0 +1,118 @@
+﻿@model RoleEdit
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="page-header">
+    <h2 class="header-title">Chỉnh sửa quyền truy cập</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/admin/trang-chu" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a href="/admin/quyen-truy-cap" class="breadcrumb-item">Danh sách quyền truy cập</a>
+            <span class="breadcrumb-item active">Chỉnh sửa thông tin</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Chỉnh sửa quyền truy cập</h4>
+    </div>
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="Roles" asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="RoleName" value="@Model.Role.Name" />
+            <div>
+                <div>
+                    <h2>Thêm người dùng vào quyền <span class="badge badge-primary">@Model.Role.Name</span></h2>
+                    <table id="m_table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Tên tài khoản</td>
+                                <td>#</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.NonMembers.Count() == 0)
+                            {
+                                <tr><td>Tất cả người dùng đều có quyền này</td></tr>
+                            }
+                            else
+                            {
+                                foreach (AppUser user in Model.NonMembers)
+                                {
+                                    <tr>
+                                        <td>@user.UserName</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <input id="@user.Id-m" value="@user.Id" name="AddIds" type="checkbox">
+                                                <label for="@user.Id-m"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Tên tài khoản</td>
+                                <td>#</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div>
+                    <h2>Xóa người dùng khỏi quyền <span class="badge badge-primary">@Model.Role.Name</span></h2>
+                    <table id="nm_table" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Tên tài khoản</td>
+                                <td>#</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Members.Count() == 0)
+                            {
+                                <tr><td>Không có tài khoản nào thuộc quyền này</td></tr>
+                            }
+                            else
+                            {
+                                foreach (AppUser user in Model.Members)
+                                {
+                                    <tr>
+                                        <td>@user.UserName</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <input id="@user.Id-nm" value="@user.Id" name="DeleteIds" type="checkbox">
+                                                <label for="@user.Id-nm"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Tên tài khoản</td>
+                                <td>#</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="/admin/quyen-truy-cap" class="btn btn-info">Trở về danh sách</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $("#m_table").dataTable();
+        $("#nm_table").dataTable();
+    </script>
+}

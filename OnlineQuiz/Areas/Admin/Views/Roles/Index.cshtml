@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2 class="header-title">Danh sách quyền truy cập</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/admin/trang-chu" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <span class="breadcrumb-item active">Danh sách quyền truy cập</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h4 class="card-title">Danh sách quyền truy cập</h4>
+            <a href="/admin/quyen-truy-cap/tao-moi" class="btn btn-primary">
+                <i class="anticon anticon-plus-circle"></i> Thêm
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <table id="d_table" class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Quyền truy cập</td>
+                    <td>#</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>@item.Name</td>
+                        <td>
+                            <a href="/admin/quyen-truy-cap/chinh-sua/@item.Id" class="btn btn-warning">
+                                <i class="anticon anticon-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Id</td>
+                    <td>Quyền truy cập</td>
+                    <td>#</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#d_table").dataTable();
+        });
+    </script>
+}

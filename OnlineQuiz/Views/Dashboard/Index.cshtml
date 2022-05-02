@@ -1,0 +1,59 @@
+﻿@model OnlineQuiz.ViewModels.CourseTestVM
+@{
+    ViewData["Title"] = "Danh sách lớp";
+}
+
+<div class="main-content">
+    <div class="card">
+        <div class="card-body">
+            <table id="d_table" class="table">
+                <thead>
+                    <tr>
+                        <th>Tên môn học</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 0;}
+                    @foreach (var itemC in Model.Courses)
+                    {
+                        <tr>
+                            <td class="w-75">@itemC.CourseName</td>
+                            <td class="w-25">
+                                <div class="dropdown dropdown-animated">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span>Danh sách bài thi</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @foreach (var itemT in Model.Tests)
+                                        {
+                                            if (itemC.CourseId == itemT.CourseId)
+                                            {
+                                                <a class="dropdown-item" 
+                                                 asp-area="" asp-controller="Dashboard" asp-action="TakeExam" asp-route-id="@itemT.TestId" asp-route-Cid="@itemC.CourseId"
+                                                >@itemT.TestName</a>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Tên môn học</th>
+                        <th>#</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $("#d_table").dataTable();
+    </script>
+}

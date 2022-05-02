@@ -1,0 +1,84 @@
+﻿@model OnlineQuiz.Models.Test
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-header">
+    <h2 class="header-title">Tạo mới thông tin bài thi</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="/admin/trang-chu" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a href="/admin/bai-thi" class="breadcrumb-item">Danh sách bài thi</a>
+            <span class="breadcrumb-item active">Tạo mới thông tin</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h4 class="card-title">Tạo mới thông tin bài thi</h4>
+    </div>
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="Tests" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="TestName" class="col-sm-2 col-form-label">Tên bài thi</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="TestName" placeholder="Tên bài thi">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="IsActive" class="col-sm-2 col-form-label">Trạng thái</label>
+                <div class="col-sm-10 d-flex align-items-center">
+                    <div class="switch m-r-10">
+                        <input type="checkbox" id="switch-1" asp-for="IsActive">
+                        <label for="switch-1"></label>
+                    </div>
+                    <label id="switchActive">Ẩn</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="HasConstructed" class="col-sm-2 col-form-label">Dạng bài thi</label>
+                <div class="col-sm-10 d-flex align-items-center">
+                    <div class="switch m-r-10">
+                        <input type="checkbox" id="switch-2" asp-for="HasConstructed">
+                        <label for="switch-2"></label>
+                    </div>
+                    <label id="switchConstruc">Trắc nghiệm - Tự luận</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="CourseId" class="col-sm-2 col-form-label">Môn học</label>
+                <div class="col-sm-10">
+                    <select class="form-control select2" asp-for="CourseId" asp-items="@ViewBag.Courses">
+                        <option></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="/admin/bai-thi" class="btn btn-info">Trở về danh sách</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('.select2').select2();
+
+        $("#switch-1").click(function () {
+            var checked = $('#switch-1').is(':checked');
+            $('#switchActive').text(checked ? 'Hiện' : 'Ẩn');
+        });
+
+        $("#switch-2").click(function () {
+            var checked = $('#switch-2').is(':checked');
+            $('#switchConstruc').text(checked ? 'Trắc nghiệm' : 'Trắc nghiệm - Tự luận');
+        });
+    </script>
+}
