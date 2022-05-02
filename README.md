@@ -34,5 +34,5 @@ Chú ý : Để không bị lỗi khi truy cập trang quyền và tài 
 - Chạy chương trình (❁´◡`❁)
 - Tài khoản admin : admin - admin123@
 
-#### Created by Nông Đức Thắng - CNTT 44 - CĐSP Tây Ninh (^///^)
-#### Special thanks to Trường CĐSP Tây Ninh & Trung Tâm CNTT Tỉnh Tây Ninh ٩(◕‿◕｡)۶
+#### 🎉🎉🎉🎉🎉 Created by Nông Đức Thắng - CNTT 44 - CĐSP Tây Ninh (^///^) 
+#### 💋💋💋💋💋 Special thanks to Trường CĐSP Tây Ninh & Trung Tâm CNTT Tỉnh Tây Ninh ٩(◕‿◕｡)۶
