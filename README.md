@@ -33,6 +33,7 @@ git clone https://github.com/thawsgnotwjbu3103/online-quiz-public.git
 Chú ý : Để không bị lỗi khi truy cập trang quyền và tài khoản, luôn thêm dòng "MultipleActiveResultSets=True"
 - Chạy chương trình (❁´◡`❁)
 - Tài khoản admin : admin - admin123@
+- Để vào trang admin, hãy thêm /admin vào phía sau url, ví dụ abc.com/admin
 
 #### 🎉🎉🎉🎉🎉 Created by Nông Đức Thắng - CNTT 44 - CĐSP Tây Ninh (^///^) 
 #### 💋💋💋💋💋 Special thanks to Trường CĐSP Tây Ninh & Trung Tâm CNTT Tỉnh Tây Ninh ٩(◕‿◕｡)۶
